@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Image Encryption Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #dfe9f3, #ffffff);
+            color: #333;
+            padding: 40px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        form {
+            background: #fff;
+            display: inline-block;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 400px;
+            width: 100%;
+        }
+        input[type="file"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 12px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .output {
+            margin-top: 30px;
+        }
+        img {
+            margin-top: 15px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        a.download-link {
+            display: inline-block;
+            margin-top: 15px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+        a.download-link:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 Image Encryption / Decryption Tool</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select Image:</label><br>
+        <input type="file" name="image" required title="Select an image to upload" placeholder="Choose image file"><br>
+
+        <label>Enter Encryption Key:</label><br>
+        <input type="number" name="key" placeholder="e.g., 25" required><br>
+
+        <label>Choose Operation:</label><br>
+        <select name="mode" required title="Choose operation: encrypt or decrypt">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select><br>
+
+        <button class="btn" type="submit">🔄 Process Image</button>
+    </form>
+
+    {% if filename %}
+    <div class="output">
+        <h2>🖼️ Processed Image:</h2>
+        <img src="{{ url_for('static', filename='output/' + filename) }}" alt="Processed image"><br>
+        <a class="download-link" href="{{ url_for('download', filename=filename) }}">⬇ Download Image</a>
+    </div>
+    {% endif %}
+</body>
+</html>
