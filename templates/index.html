@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Encryption Tool</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="file"], input[type="number"], select {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+            padding: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+        }
+        img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Image Encryption Tool (Pixel Manipulation)</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload Image:</label>
+        <input type="file" name="image" required>
+        <label>Enter Key (e.g., 123):</label>
+        <input type="number" name="key" required>
+        <label>Select Mode:</label>
+        <select name="mode">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result_path %}
+        <h3>Result:</h3>
+        <img src="{{ result_path }}" alt="Processed Image">
+        <a href="{{ url_for('download', filename=result_path.split('/')[-1]) }}">
+            <button>Download</button>
+        </a>
+    {% endif %}
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</div>
+</body>
+</html>
